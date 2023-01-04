@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import style from './Contacts.module.css';
 
 const ContactListItem = ({ contacts, handleDelete }) =>
@@ -6,7 +6,7 @@ const ContactListItem = ({ contacts, handleDelete }) =>
     <li className={style.contactsItem} key={id}>
       {name}: {number}
       <button
-        className={style.contactBtn} //
+        className={style.contactBtn}
         type="submit"
         onClick={() => handleDelete(id)}
       >
@@ -18,6 +18,12 @@ const ContactListItem = ({ contacts, handleDelete }) =>
 export default ContactListItem;
 
 ContactListItem.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  handleDelete: PropTypes.func.isRequired,
+  contacts: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.string.isRequired,
+      name: propTypes.string.isRequired,
+      number: propTypes.string.isRequired,
+    })
+  ),
+  handleDelete: propTypes.func.isRequired,
 };

@@ -18,32 +18,19 @@ class App extends Component {
     filter: '',
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
   handleSubmit = e => {
-    const { name, number } = this.state;
     e.preventDefault();
-    this.setState(
-      prevState => ({
-        contacts: prevState.contacts.concat([
-          { id: nanoid(), name: name, number: number },
-        ]),
-      }),
-      () => {
-        console.log(this.state);
-      }
-    );
-  };
-
-  addContact = ({ name, number }) => {
+    const name = e.target.name.value;
+    const number = e.target.number.value;
     const toLowerCase = name.toLowerCase();
     const contacts = this.state.contacts;
     let nameOntheList = false;
 
-    const newContact = { id: nanoid(), name: name, number: number };
+    const newContact = {
+      id: nanoid(),
+      name: name,
+      number: number,
+    };
 
     contacts.forEach(contact => {
       if (contact.name.toLowerCase() === toLowerCase) {
@@ -57,6 +44,11 @@ class App extends Component {
     this.setState(prevState => ({
       contacts: prevState.contacts.concat(newContact),
     }));
+    e.target.reset();
+  };
+
+  handleFilterChange = e => {
+    this.setState({ filter: e.target.value });
   };
 
   filteredContacts = () => {
@@ -81,9 +73,9 @@ class App extends Component {
     return (
       <div className={style.container}>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.addContact} />
+        <ContactForm onSubmit={this.handleSubmit} />
         <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.handleChange} />
+        <Filter value={filter} onChange={this.handleFilterChange} />
         <ContactList>
           <ContactListItem
             contacts={this.filteredContacts()}

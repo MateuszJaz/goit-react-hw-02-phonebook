@@ -4,16 +4,17 @@ import { nanoid } from 'nanoid';
 import style from './ContactForm.module.css';
 
 class ContactForm extends Component {
-  id = nanoid();
-
   render() {
+    const nameId = nanoid();
+    const numberId = nanoid();
+
     return (
       <>
         <form className={style.form} onSubmit={this.props.onSubmit}>
-          <label htmlFor="name">
+          <label htmlFor={nameId}>
             Name
             <input
-              id="name"
+              id={nameId}
               className={style.formInput}
               autoComplete="off"
               type="text"
@@ -24,10 +25,10 @@ class ContactForm extends Component {
               required
             />
           </label>
-          <label htmlFor="number">
+          <label htmlFor={numberId}>
             Number
             <input
-              id="number"
+              id={numberId}
               className={style.formInput}
               autoComplete="off"
               type="tel"

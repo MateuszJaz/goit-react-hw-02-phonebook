@@ -10,9 +10,10 @@ class ContactForm extends Component {
     return (
       <>
         <form className={style.form} onSubmit={this.props.onSubmit}>
-          <label htmlFor={'name'}>
+          <label htmlFor="name">
             Name
             <input
+              id="name"
               className={style.formInput}
               autoComplete="off"
               type="text"
@@ -23,9 +24,10 @@ class ContactForm extends Component {
               required
             />
           </label>
-          <label htmlFor={'number'}>
+          <label htmlFor="number">
             Number
             <input
+              id="number"
               className={style.formInput}
               autoComplete="off"
               type="tel"
